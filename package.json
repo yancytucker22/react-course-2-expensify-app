@@ -2,7 +2,8 @@
   "name": "expensify",
   "version": "1.0.0",
   "engines": {
-    "node": "10.14.0"
+    "node": "10.14.0",
+    "yarn": "1.15.2"
   },
   "main": "index.js",
   "license": "MIT",
