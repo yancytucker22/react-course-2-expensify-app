@@ -32,7 +32,9 @@ export const removeExpense = ({id} = {}) => ({
 
 export const startRemoveExpense = ({id} = {}) => {
   return (dispatch) => {
-    database.ref(`expenses/${id}`).remove()
+    return database.ref(`expenses/${id}`).remove().then(() => {
+      dispatch(removeExpense({id}));
+    });
   };
 };
 
@@ -41,6 +43,15 @@ export const editExpense = (id, updates) => ({
     id,
     updates       
 });
+
+export const startEditExpense = ({id}, updates) => {
+  return (dispatch) => {
+    return database.ref(`expenses/${id}`).update(updates).then(() => {
+      // call dispatch which will call redux 
+      dispatch(editExpense(id, updates));
+    });
+  };
+};
 
 export const setExpenses = (expenses) => ({
     type: 'SET_EXPENSES',
