@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';  
 import AppRouter, {history} from './routers/AppRouter';  
 import { startSetExpenses } from './actions/expenses'; 
-
+   
 import {login, logout} from './actions/auth';
 import getVisibleExpenses from './selectors/expenses';
 
@@ -16,6 +16,7 @@ import 'react-dates/lib/css/_datepicker.css';
 
 //import './firebase/firebase';
 import { firebase } from './firebase/firebase';
+import LoadingPage from './components/LoadingPage';
 
 //import './playground/promises';   
 
@@ -35,11 +36,11 @@ const renderApp = () => {
     if (!hasRendered) {
         ReactDOM.render(jsx, document.getElementById('app'));
         hasRendered = true;
-    }
+    }   
 };
 
 
-ReactDOM.render(<p>loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -60,5 +61,6 @@ firebase.auth().onAuthStateChanged((user) => {
         history.push('/');
     }
 });
+
 //ReactDOM.render(jsx, document.getElementById('app'));
   
